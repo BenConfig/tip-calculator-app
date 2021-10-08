@@ -319,6 +319,7 @@ input[type="checkbox"]:checked + .btn:hover::before { display: none; }
         max-width: 57.5rem;
         padding: 2rem;
         border-radius: var(--br-lg);
+        margin-bottom: 2.5rem;
     }
 
     .user-inputs { padding: 1.0625rem .625rem 1rem .5625rem; }
