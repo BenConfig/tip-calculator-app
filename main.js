@@ -147,7 +147,6 @@ INPUTS.forEach( input => {
     });
 });
 
-
 INPUTS.forEach( input => {
     // Listen for changes to the input fields
     input.addEventListener('input', e => {
