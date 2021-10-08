@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+    <link rel="stylesheet" href="main.css">
+    
+    <title>Frontend Mentor | Tip Calculator App</title>
+
+  </head>
+
+  <body>
+
+    <!-- Title -->
+    <header class="header">
+      <h1 class="sr-only">Splitter</h1>
+      <img class="header__img" src="images/logo.svg" alt="" aria-hidden="true">
+    </header>
+
+    <main class="main">
+
+      <!-- User Inputs Section -->
+      <section class="user-inputs">
+
+        <h2 class="sr-only">User Inputs</h2>
+
+        <!-- Bill -->
+        <label class="label label--bill" for="bill">Bill</label>
+        <div class="input-container input-container--bill">
+          <input
+          class="input input--padding-left"
+          type="number"
+          id="bill"
+          placeholder="0"
+          min="0"
+          step=".01">
+        </div>
+
+        <!-- Select Tip % -->
+        <fieldset class="tip">
+          <legend class="label label--tip">Select Tip %</legend>
+    
+          <input 
+            class="sr-only tip-percent"
+            type="checkbox"
+            id="five-percent"
+            name="select-tip"
+            data-percent="5">
+          <label class="btn" for="five-percent">5%</label>
+          
+          <input
+            class="sr-only tip-percent"
+            type="checkbox"
+            id="ten-percent"
+            name="select-tip"
+            data-percent="10">
+          <label class="btn" for="ten-percent">10%</label>
+    
+          <input 
+            class="sr-only tip-percent"
+            type="checkbox"
+            id="fifteen-percent"
+            name="select-tip"
+            data-percent="15">
+          <label class="btn" for="fifteen-percent">15%</label>
+    
+          <input 
+            class="sr-only tip-percent"
+            type="checkbox"
+            id="twentyfive-percent"
+            name="select-tip"
+            data-percent="25">
+          <label class="btn" for="twentyfive-percent">25%</label>
+    
+          <input 
+            class="sr-only tip-percent"
+            type="checkbox"
+            id="fifty-percent"
+            name="select-tip"
+            data-percent="50">
+          <label class="btn" for="fifty-percent">50%</label>
+    
+          <label class="sr-only" for="custom-tip">Custom</label>
+          <div class="input-container">
+            <input
+              class="input"
+              type="number"
+              id="custom-tip"
+              placeholder="Custom"
+              min="0"
+              step=".01">
+          </div>
+          
+        </fieldset>
+
+        <!-- Number of People -->
+        <label class="label label--headcount" for="headcount">Number of People</label>
+        <div class="input-container input-container--headcount">
+          <input
+            class="input input--padding-left"
+            type="number"
+            id="headcount"
+            placeholder="0"
+            min="0"
+            max="999">
+            <p class="error-message" id="error-message">Can't be zero</p>
+        </div>
+
+      </section>
+
+      <!-- Calculations Section -->
+      <section class="calculations">
+
+        <h2 class="sr-only">Calculations</h2>
+
+        <div class="calculations__container">
+          <p class="calculations__name">Tip Amount <span class="calculations__name--small">/ person</span></p>
+          <p class="calculations__num" id="tip-amount">$0.00</p>
+        </div>
+        
+        <div class="calculations__container">
+          <p class="calculations__name">Total <span class="calculations__name--small">/ person</span></p>
+          <p class="calculations__num" id="total-amount">$0.00</p>
+        </div>
+        
+        <button class="btn btn--reset">Reset</button>
+
+      </section>
+
+    </main>
+
+    <script src="main.js"></script>
+  </body>
+
+</html>

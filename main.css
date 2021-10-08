@@ -1,0 +1,343 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
+/* ------------------------------------------------------ */
+/*                    Custom Properties                   */
+/* ------------------------------------------------------ */
+:root {
+    --clr-white: hsl(0, 0%, 100%);
+    --clr-input: hsl(195, 50%, 97%);
+    --clr-body-bg: hsl(185, 41%, 84%);
+    --clr-placeholder: hsl(184, 19%, 68%);
+    --clr-hover: hsl(173, 61%, 77%);
+    --clr-active: hsl(170, 51%, 52%);
+    --clr-heading: hsl(183, 8%, 42%);
+    --clr-primary: hsl(184, 57%, 18%);
+    --clr-error: hsl(35, 100%, 40%);
+
+    --fw-normal: 400;
+    --fw-bold: 700;
+
+    --br-sm: .25rem;
+    --br-md: 1rem;
+    --br-lg: 1.5rem;
+}
+
+/* ------------------------------------------------------ */
+/*                 Resets / Global Styles                 */
+/* ------------------------------------------------------ */
+.sr-only {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+* { box-sizing: border-box; }
+
+body,
+input,
+fieldset,
+button,
+p { margin: 0; }
+
+fieldset,
+legend { padding: 0; }
+
+input,
+fieldset,
+button { border: none; }
+
+body {
+    display: grid;
+    justify-items: center;
+    align-content: end;
+    min-height: 100vh;
+    font: var(--fw-bold) 1.5rem/1 'Space Mono', sans-serif;
+    background: var(--clr-body-bg);
+}
+
+/* ------------------------------------------------------ */
+/*                          Title                         */
+/* ------------------------------------------------------ */
+.header { padding: 2.5rem; }
+
+.header__img { display: block; }
+
+.main {
+    width: 100%;
+    max-width: 33.625rem;
+    padding: 1.5rem;
+    border-radius: var(--br-lg) var(--br-lg) 0 0;
+    box-shadow: 0 2rem 2rem hsla(170, 51%, 30%, .2);
+    background:var(--clr-white);
+}
+
+/* ------------------------------------------------------ */
+/*                  User Inputs Sections                  */
+/* ------------------------------------------------------ */
+.user-inputs { padding: .75rem .5rem 2rem; }
+
+.label {
+    display: block;
+    font-size: 1rem;
+    font-weight: var(--fw-normal);
+    margin-bottom: .625rem;
+    color: var(--clr-heading);
+}
+
+.label--tip { margin-bottom: 1.25rem; }
+
+.input,
+.btn {
+    width: 100%;
+    min-height: 44px; /* Accessibility requirement */
+    font: inherit;
+    border-radius: var(--br-sm);
+    cursor: pointer;
+}
+
+.input {
+    text-align: right;
+    padding: .375rem 1.125rem .375rem .75rem;
+    color: var(--clr-primary);
+    background: var(--clr-input);
+    caret-color: var(--clr-active);
+}
+
+/* Positioning the icon inside the input */
+.input-container::before {
+    position: absolute;
+    top: 50%;
+    left: 1.125rem;
+    transform: translateY(-50%);
+}
+
+.input-container--bill::before { content: url('images/icon-dollar.svg'); }
+
+.input-container--headcount::before { content: url('images/icon-person.svg'); }
+
+/* Remove arrow fron number input (Chrome, Safari, Edge, Opera) */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove arrow from number input (Firefox) */
+input[type=number] { -moz-appearance: textfield; }
+
+::placeholder {
+    color: var(--clr-placeholder);
+    opacity: 1; /* Necessary for Firefox */
+}
+
+/* ------------------ Input Hover State ----------------- */
+.input-container { position: relative; }
+
+.input-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--br-sm);
+    box-shadow: inset 0 0 0 2px var(--clr-hover);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 250ms;
+}
+
+.input-container:hover::after { opacity: 1; }
+
+/* ------------------ Input Focus State ----------------- */
+.input:focus { outline: none; }
+
+.input-container:focus-within::after {
+    box-shadow: inset 0 0 0 2px var(--clr-active);
+    opacity: 1;
+}
+
+/* ---------------- Input 'Error' Styles ---------------- */
+.error-message {
+    position: absolute;
+    bottom: calc(100% + .625rem);
+    right: 0;
+    font-size: 1rem;
+    font-weight: var(--fw-normal);
+    color: var(--clr-error);
+    visibility: hidden;
+}
+
+.error > .input { box-shadow: inset 0 0 0 2px var(--clr-error); }
+
+.error > .error-message { visibility: visible; }
+
+/* -------------------- Button Styles ------------------- */
+.btn {
+    position: relative;
+    isolation: isolate;
+    text-align: center;
+    padding: .75rem 1.125rem;
+    color: var(--clr-input);
+    background: var(--clr-primary);
+    transition: color 250ms;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--clr-hover);
+    opacity: 0;
+    transition: opacity 250ms;
+}
+
+/* ----------------- Button Hover State ----------------- */
+.btn:hover { color: var(--clr-primary); }
+
+.btn:hover::before { opacity: 1; }
+
+/* ----------------- Button Focus State ----------------- */
+input[type="checkbox"]:focus + .btn{
+    outline: 2px dotted var(--clr-white);
+    outline-offset: -2px;
+}
+
+/* --------------- Button 'Selected' State -------------- */
+input[type="checkbox"]:checked + .btn {
+    color: var(--clr-primary);
+    background: var(--clr-active);
+}
+
+input[type="checkbox"]:checked + .btn:hover::before { display: none; }
+
+/* ----------------- Select Tip Section ----------------- */
+.tip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+    gap: 1rem;
+    align-items: center;
+    margin: 2.25rem 0;
+}
+
+/* ------------------------------------------------------ */
+/*                  Calculations Section                  */
+/* ------------------------------------------------------ */
+.calculations {
+    padding: 1.5rem;
+    padding-top: 2.6875rem;
+    border-radius: var(--br-md);
+    background: var(--clr-primary);
+    margin-bottom: .5rem;
+}
+
+.calculations__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: .25rem 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.calculations__name {
+    min-width: 10ch;
+    font-size: 1rem;
+    font-weight: var(--fw-normal);
+    color: var(--clr-input);
+}
+
+.calculations__name--small {
+    display: block;
+    font-size: .875rem;
+    font-weight: var(--fw-normal);
+    color: var(--clr-placeholder);
+    margin-top: .4325rem;
+}
+
+.calculations__num {
+    grid-column: 2 / 3;
+    font-size: 2rem;
+    font-weight: var(--fw-normal);
+    text-align: right;
+    color: var(--clr-active)
+}
+
+/* -------------------- Reset Button -------------------- */
+.btn--reset {
+    grid-column: 1 / 3;
+    width: 100%;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    padding-block: .875rem;
+    color: var(--clr-primary);
+    background: var(--clr-active);
+    margin-top: .25rem;
+    pointer-events: none;
+}
+
+.btn--reset:focus { outline: none; }
+
+.btn--reset:focus {
+    outline: none;
+}
+
+.btn--reset::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    border-radius: inherit;
+    background: hsla(187, 30%, 35%, .9);
+}
+
+.enabled { pointer-events: visible; }
+
+.enabled::after { visibility: hidden; }
+
+.enabled:focus {
+    outline: 2px dotted var(--clr-white);
+    outline-offset: -2px;
+}
+
+/* ------------------------------------------------------ */
+/*                    Larger Viewports                    */
+/* ------------------------------------------------------ */
+@media only screen and (min-width: 54em) {
+    body {
+        align-content: center;
+        padding: 5rem;
+    }
+
+    .header { margin-bottom: 2.9675rem; }
+
+    .main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.875rem;
+        max-width: 57.5rem;
+        padding: 2rem;
+        border-radius: var(--br-lg);
+    }
+
+    .user-inputs { padding: 1.0625rem .625rem 1rem .5625rem; }
+
+    .tip {
+        column-gap: .875rem;
+        margin: 2.75rem 0;
+    }
+
+    .calculations {
+        display: flex;
+        flex-direction: column;
+        padding: 3.4375rem 2.5rem 2.5rem;
+        margin-bottom: 0;
+    }
+
+    .calculations__container { margin-bottom: 3.125rem; }
+
+    .calculations__num { font-size: 2.875rem; }
+
+    .btn--reset {
+        margin-top: auto;
+    }
+}
